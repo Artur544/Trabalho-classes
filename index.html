@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Escola de Música</h1>
+        <div id="conteudo"></div>
+    </body>
+
+    <script>
+        
+        class pessoa
+        {
+            constructor(cpf, nome)
+            {
+                this.cpf = cpf;
+                this.nome = nome;
+            }
+        }
+
+        class professor extends pessoa
+        {
+            constructor(cpf, nome, area, telefone)
+            {
+                super(cpf, nome);
+                this.area = area;
+                this.telefone = telefone;
+            }
+            imprime1()
+            {
+                let dados = document.querySelector("#conteudo");
+
+                let professor = document.createTextNode("Professor: " + this.nome);
+
+                let dados_prof = document.createElement("ul");
+                dados_prof.innerHTML = "<li>Área: " + this.area + "</li>" + "<li>CPF: " + this.cpf + "</li>" + + "<li>Telefone: " + this.telefone + "</li>";
+
+                let br = document.createElement("br");
+
+                professor.appendChild(dados_prof);
+                dados.appendChild(professor);
+                dados.appendChild(br);
+            }
+        }
+
+        class aluno extends pessoa
+        {
+            constructor(cpf, nome, matricula)
+            {
+                super(cpf, nome);
+                this.matricula = matricula;
+            }
+
+            imprime2()
+            {
+                let dados = document.querySelector("#conteudo");
+
+                let aluno1 = document.createElement("ul");
+                aluno1.innerHTML = "<i><b><li>" + this.nome + "</li></b></i>";
+
+                let dados_al1 = document.createElement("ul");
+                dados_al1.innerHTML = "<li>Matrícula: " + this.matricula + "</li>" + "<li>CPF: " + this.cpf + "</li>";
+
+                let br = document.createElement("br");
+
+                aluno1.appendChild(dados_al1);
+                dados.appendChild(aluno1);
+                dados.appendChild(br);
+            }
+        }
+
+        class turma
+        {
+            constructor(professor, aluno, id)
+            {
+                this.professor = professor;
+                this.aluno = aluno;
+                this.indentificacao = id;
+            }
+
+            imprimeDados()
+            {
+                let dados = document.querySelector("#conteudo");
+
+                let turma = document.createElement("div");
+                turma.innerHTML = "<h3><b>Turma: " + this.indentificacao + "</b></h3>";
+                dados.appendChild(turma);
+
+                let professor = document.createElement("b")
+                professor.innerHTML = "Professor:"
+
+                let dados_prof = document.createElement("ul");
+                dados_prof.innerHTML = "<li>Nome: " + this.professor.nome + "</li>" + "<li>Área: " + this.professor.area + "</li>" + "<li>CPF: " + this.professor.cpf + "</li>" + "<li>Telefone: " + this.professor.telefone + "</li>";
+
+                let br = document.createElement("br");
+
+                let aluno = document.createElement("b")
+                aluno.innerHTML = "Alunos:"
+
+                dados.appendChild(professor);
+                dados.appendChild(dados_prof);
+                dados.appendChild(br);
+                dados.appendChild(aluno)
+
+                this.aluno.forEach(aluno => aluno.imprime2());
+            }
+        }
+
+        const p1 = new professor("12345678911", "Roberto Carlos", "Piano", "911112222");        
+        const a1 = new aluno("11122233344", "Jéssica Januário", "2022300001");
+        const a2 = new aluno("55566677788", "Marcos Antônio", "2022300002");
+        const a3 = new aluno("99900011122", "Maurício Duarte", "2022300003");
+        const a4 = new aluno("33344455566", "Carla Rodrigues", "2022300004");
+
+        const p2 = new professor("12345678911", "Vitor Kley", "Violão", "933334444");        
+        const a5 = new aluno("22233344455", "João Silva", "2022300894");
+        const a6 = new aluno("66677788899", "Aurora Andrades", "2022300005");
+        const a7 = new aluno("00011122233", "Monica Oliveira", "2022300006");
+        const a8 = new aluno("44455566677", "Camila Nunes", "2022300007");
+
+        const alunos1 = [];
+        
+        alunos1.push(a1);
+        alunos1.push(a2);
+        alunos1.push(a3);
+        alunos1.push(a4);
+
+        const t1 = new turma(p1, alunos1, "M1");
+        
+        const alunos2 = [];
+        
+        alunos2.push(a5);
+        alunos2.push(a6);
+        alunos2.push(a7);
+        alunos2.push(a8);
+        
+        const t2 = new turma(p2, alunos2, "1M1");
+        
+        t1.imprimeDados();
+        t2.imprimeDados();
+    </script>
+
+</html>
